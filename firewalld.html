@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Firewalld</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+  <div class="container">
+    <h1>Notes on Firewalld</h1>
+    <p>Firewalld is the default for RHEL, and is provided by two packages:
+      <ul>
+        <li>firewalld</li>
+        <li>firewall-config</li>
+      </ul>
+     </p>
+    <p>Firewalld has two modes possible:
+      <ul>
+        <li>Runtime changes (don't survive at reboot or reload of the firewall).</li>
+        <li>Permanent changes.</li>
+      </ul>
+      Firewalld's main command is <strong>firewall-cmd</strong>.
+    </p>
+
+    <h4>Some commands</h4>
+    <ul>
+      <li>Firewalld automatically creates some zones with different rules,
+      to make easier apply changes only to certain situations (eg internal network,
+      dmz...). To list all the zones <strong>firewall-cmd --get-zones</strong>. </li>
+      <li>The default working zone it's the public one. To get the default zones,
+      <strong>firewall-cmd --get-default-zones</strong>. </li>
+      <li>To view all the rules actually running on my system,
+        <strong>firewall-cmd --list-all</strong>. </li>
+      <li>To add a port, <strong>firewall-cmd --add-port=80/tcp</strong>. </li>
+      <li>Instead of setting the ports manually, sometimes I can add one of the
+      prebuilt services, such as nfs, <strong>firewall-cmd --add-service=nfs</strong>. </li>
+      <li>To make permanent changes, it is sufficient to add the <strong>--permanent</strong> flag.</li>
+      <li>To reload the firewall, <strong>firewall-cmd --reload</strong>. All runtime
+      changes will be lost!</li>
+      <li>It is also possible panic mode, eveen though it is dangerous because it locks
+      all the ports and kicks you out if you're remote: <strong>firewall-cmd --panic=on</strong>. </li>
+    </ul>
+  </div>
+
+  </body>
+</html>
