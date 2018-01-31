@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Notes on Network File System (NFS)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Notes on Network File System (NFS)</h1>
+      <h3>What it is</h3>
+      <p>Network File System is a server-client protocol used for sharing files
+      and directories between Unix/Linux systems. It is a popular distributed
+      filesystem protocol that enables user to mount remote directories on their
+      server.</p>
+      <h3>Requirements</h3>
+      <p>
+        <ul>
+          <li>A server and a client.</li>
+          <li>Packages: nfs-utils, rpcbind.</li>
+        </ul>
+      </p>
+      <h3>Setup</h3>
+      <h4>Server side</h4>
+      <ul>
+        <li>Install packages rpcbind and nfs-utils.</li>
+        <li>Start the services with <strong>systemctl start rcpbind</strong> and <strong>systemctl start nfs-server</strong>. </li>
+        <li>Enable the services to start at boot via the command <strong>systemctl enable service_name</strong>. </li>
+        <li>Add the path of the directory to mount in /etc/exports. A typical configuration will be like this:<br><br>
+          <p>/path_to_the_directory  ip_address_of_client(rw,sync,no_root_squash)<br>
+          /my_shared_dir 192.168.0.120(rw,sync,no_root_squash) </p>
+        </li>
+        <li><strong>exportfs -a</strong> to export all the directories in /etc/exports.</li>
+        <li><strong>exportfs -v</strong> to view all exported directories on the server.</li>
+        <li>Add nfs, mountd and rpcbind to the services allowed by firewalld:
+          <ul>
+            <li><strong>firewall-cmd --add-service=nfs --permanent</strong> </li>
+            <li><strong>firewall-cmd --add-service=mountd --permanent</strong> </li>
+            <li><strong>firewall-cmd --add-service=rpc-bind --permanent</strong> </li>
+            <li><strong>firewall-cmd --reload</strong> </li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Client side</h4>
+      <ul>
+        <li>Install packages rpcbind and nfs-utils and enable them as explained in the server side section.</li>
+        <li>To show the directories exported, <strong>showmount -e server_ip</strong>. </li>
+        <li>Configure /etc/fstab to mount the shared directory at boot <br><br>
+           <p>#Example of entry in /etc/fstab <br>
+           192.168.122.98:/my_shared_dir /mnt nfs defaults 0 0</p>
+         </li>
+        <li>Now mount all the directories in /etc/fstab with <strong>mount -a</strong>. </li>
+      </ul>
+      <p>Now it should work everything.</p>
+
+      <h3>Soft mount</h3>
+      <h3>Hard mount</h3>
+    </div>
+
+  </body>
+</html>
