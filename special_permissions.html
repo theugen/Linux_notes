@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Special Permissions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Special permissions</h1>
+      <p>Sometimes it may happen to find other kind of permissions instead of the
+      canonical read, write and execute: these are the special permissions,
+      indicated with <i>s</i> and <i>t</i>.</p>
+      <p>There are three kinds of special permissions:
+        <ul>
+          <li>setuid</li>
+          <li>setgid</li>
+          <li>stickybit</li>
+        </ul>
+      </p>
+
+      <h4>Setuid</h4>
+      <p>Setuid is indicated by an <strong>s</strong> in the place of the execute
+      permissions for the user field: it indicates that that application must be
+      executed as the owner of the application and not as the user that executes
+      it. An example of this special permission can be found in /usr/bin/passwd.</p>
+
+      <h4>Setgid</h4>
+      <p>Same as setuid, but for the group field.</p>
+
+      <h4>Sticky bit</h4>
+      <p>This kind of permission, indicated by a <strong>t</strong> in the <i>others</i>
+      field, is used on directories to prevent users to delete files
+      that are not owned. This is because the actions of creating and deleting
+      files are not regulated by the permissions on the file itself, thus meaning
+      that a user or program with no permissions on a file (e.g. on a file owned by root)
+      has still the power to delete it. To prevent this we set the stickybit.
+      </p>
+      <p>Sticky bit can be set in two ways:
+        <ul>
+          <li><strong>chmod o+t dir_name</strong>.</li>
+          <li><strong>chmod 1700 dir_name</strong>, ie typing 1 before the other
+            permissions.</li>
+        </ul>
+      </p>
+
+      <p>It is worth noting that, if user/group/others doesn't have execute
+        permissions, instead of <strong>s</strong> and <strong>t</strong> we will
+      find the capital letters <strong>S</strong> and <strong>T</strong>. </p>
+
+    </div>
+  </body>
+</html>

@@ -5,3 +5,4 @@ There wouldn't be any order, just a bunch of html files corresponding to the var
 # Index
 * Firewalld
 * NFS
+* Special Permissions
