@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Setup of an Apache Server</title>
+  </head>
+  <body>
+    <h1>How to setup an Apache Server: the simplest config</h1>
+    <p>
+      <ul>
+        <li>On the server, install the <strong>httpd</strong> package.</li>
+        <li>In /etc/httpd/conf, modify the httpd.conf file, by means of
+        specifying the <strong>ServerName</strong> directive, e.g: <br>
+        ServerName www.example.com .</li>
+        <li>Put the file relative to the website in /var/www/html, that
+        will be the default directory in which Apache will be searching (it can
+        be modified specifying the path in the DocumentRoot directive in the
+        httpd.conf file).</li>
+        <li>Configure /etc/hosts to access the website by name.</li>
+        <li>Start and enable httpd service.</li>
+        <li>Check if website can be displayed from the server itself (it can be
+          useful to use elinks, just for a quick try).</li>
+        <li>Open port 80 (Hint: <strong>firewall-cmd --add-port=80/tcp</strong>,
+          <strong>firewall-cmd --add-port=80/udp</strong> or just
+          <strong>firewall-cmd --add-service=http</strong>).</li>
+      </ul>
+    </p>
+  </body>
+</html>
